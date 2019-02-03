@@ -19,7 +19,6 @@ public class WarMap {
   }
 
   public char getValueOfCoord(Coordinate coordinate){
-    checkIfCoordIsWithinMap(coordinate);
     return warMapStr[coordinate.getCoordinateY()].charAt(coordinate.getCoordinateX());
   }
 
@@ -28,8 +27,7 @@ public class WarMap {
 
   }
 
-  private void checkIfCoordIsWithinMap(Coordinate coordinate) {
-    if(!(coordinate.getCoordinateX() <= warMapStr[0].length()) || !(coordinate.getCoordinateX() <= warMapStr.length))
-      throw new CoordOutOfMapException("This coordinate  isn't within map");
+  public boolean isCoordIsWithinMap(Coordinate coordinate) {
+    return (!(coordinate.getCoordinateX() <= warMapStr[0].length()) || !(coordinate.getCoordinateX() <= warMapStr.length));
   }
 }

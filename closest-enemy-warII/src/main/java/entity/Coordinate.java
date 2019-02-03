@@ -1,7 +1,5 @@
 package entity;
 
-import java.util.Objects;
-
 public class Coordinate {
 
   private int coordinateX;
@@ -30,8 +28,32 @@ public class Coordinate {
     return this;
   }
 
-  public boolean isEmpty(){
+  public boolean isEmpty() {
     return coordinateX < 0 && coordinateY < 0;
+  }
+
+  public Coordinate getRightCoordinate() {
+    return new Coordinate()
+        .setCoordinateX( this.coordinateX + 1)
+        .setCoordinateY( this.coordinateY);
+  }
+
+  public Coordinate getLeftCoordinate() {
+    return new Coordinate()
+        .setCoordinateX( this.coordinateX - 1)
+        .setCoordinateY( this.coordinateY);
+  }
+
+  public Coordinate getUpCoordinate() {
+    return new Coordinate()
+        .setCoordinateX( this.coordinateX)
+        .setCoordinateY( this.coordinateY + 1);
+  }
+
+  public Coordinate getDownCoordinate() {
+    return new Coordinate()
+        .setCoordinateX( this.coordinateX)
+        .setCoordinateY( this.coordinateY - 1);
   }
 
   @Override
