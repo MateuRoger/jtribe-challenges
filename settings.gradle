@@ -1,1 +1,3 @@
 rootProject.name = 'jtribe-challenges'
+include 'closest-enemy-warII'
+
