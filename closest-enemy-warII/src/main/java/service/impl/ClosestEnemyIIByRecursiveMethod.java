@@ -2,9 +2,7 @@ package service.impl;
 
 import entity.Coordinate;
 import entity.WarMap;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import service.ClosestEnemyII;
 
@@ -13,12 +11,10 @@ public class ClosestEnemyIIByRecursiveMethod implements ClosestEnemyII {
   private static final char INITIAL_VALUE = '1';
   private static final char ENEMY_VALUE = '2';
   private Map<Coordinate, Character> scannedMap = new HashMap<>();
-  private List<Coordinate> enemyList = new ArrayList<>();
 
 
   @Override
   public int whitchEnemyIsClosest(String[] warMapString) {
-    int distance = 0;
 
     final WarMap warMap = new WarMap().setWarMapStr(warMapString);
     final Coordinate maxCoordinate = warMap.getMaxCoord();
@@ -29,51 +25,76 @@ public class ClosestEnemyIIByRecursiveMethod implements ClosestEnemyII {
 
     Coordinate initialCoordinate = searchInitialCoord(warMap, actualCoordinate);
 
-    getClosestEnemyCoordinate(warMap, actualCoordinate, distance);
+    scannedMap.clear();
+    Coordinate closeseEnemyCoordinate = getClosestEnemyCoordinate(warMap, initialCoordinate);
 
-    return distance;
+    return Math.min(
+        (Math.max(initialCoordinate.getCoordinateX(), closeseEnemyCoordinate.getCoordinateX())
+            - Math
+            .min(initialCoordinate.getCoordinateX(), closeseEnemyCoordinate.getCoordinateX())),
+        (warMapString[0].length() - closeseEnemyCoordinate.getCoordinateX() + initialCoordinate
+            .getCoordinateX())
+    )
+        + Math.min(
+        (Math.max(initialCoordinate.getCoordinateY(), closeseEnemyCoordinate.getCoordinateY())
+            - Math
+            .min(initialCoordinate.getCoordinateY(), closeseEnemyCoordinate.getCoordinateY())),
+        (warMapString.length - closeseEnemyCoordinate.getCoordinateY() + initialCoordinate
+            .getCoordinateY())
+    );
   }
 
   private Coordinate searchInitialCoord(final WarMap warMap, final Coordinate actualCoordinate) {
     Coordinate coordinate = new Coordinate();
+    scannedMap.put(actualCoordinate, warMap.getValueOfCoord(actualCoordinate));
 
     if ( warMap.getValueOfCoord(actualCoordinate) == INITIAL_VALUE){
       coordinate = actualCoordinate;
     }else{
-      if(warMap.isCoordIsWithinMap(actualCoordinate.getUpCoordinate())) {
-        coordinate = searchInitialCoord(warMap, actualCoordinate.getUpCoordinate());
+      if (!scannedMap.containsKey(warMap.getUpCoordinate(actualCoordinate))) {
+        coordinate = searchInitialCoord(warMap, warMap.getUpCoordinate(actualCoordinate));
       }
-      if(coordinate.isEmpty() && warMap.isCoordIsWithinMap(actualCoordinate.getRightCoordinate())) {
-        coordinate = searchInitialCoord(warMap, actualCoordinate.getRightCoordinate());
+
+      if (coordinate.isEmpty() && !scannedMap
+          .containsKey(warMap.getRightCoordinate(actualCoordinate))) {
+        coordinate = searchInitialCoord(warMap, warMap.getRightCoordinate(actualCoordinate));
       }
-      if(coordinate.isEmpty() && warMap.isCoordIsWithinMap(actualCoordinate.getDownCoordinate())) {
-        coordinate = searchInitialCoord(warMap, actualCoordinate.getDownCoordinate());
+      if (coordinate.isEmpty() && !scannedMap
+          .containsKey(warMap.getDownCoordinate(actualCoordinate))) {
+        coordinate = searchInitialCoord(warMap, warMap.getDownCoordinate(actualCoordinate));
       }
-      if(coordinate.isEmpty() &&warMap.isCoordIsWithinMap(actualCoordinate.getLeftCoordinate())) {
-        coordinate = searchInitialCoord(warMap, actualCoordinate.getLeftCoordinate());
+      if (coordinate.isEmpty() && !scannedMap
+          .containsKey(warMap.getLeftCoordinate(actualCoordinate))) {
+        coordinate = searchInitialCoord(warMap, warMap.getLeftCoordinate(actualCoordinate));
       }
     }
 
     return coordinate;
   }
 
-  private Coordinate getClosestEnemyCoordinate(final WarMap warMap, final Coordinate actualCoordinate, int distance) {
+  private Coordinate getClosestEnemyCoordinate(final WarMap warMap,
+      final Coordinate actualCoordinate) {
     Coordinate coordinate = new Coordinate();
+    scannedMap.put(actualCoordinate, warMap.getValueOfCoord(actualCoordinate));
 
     if ( warMap.getValueOfCoord(actualCoordinate) == ENEMY_VALUE){
       coordinate = actualCoordinate;
     }else{
-      if(warMap.isCoordIsWithinMap(actualCoordinate.getUpCoordinate())) {
-        coordinate = searchInitialCoord(warMap, actualCoordinate.getUpCoordinate());
+      if (!scannedMap.containsKey(warMap.getUpCoordinate(actualCoordinate))) {
+        coordinate = getClosestEnemyCoordinate(warMap, warMap.getUpCoordinate(actualCoordinate));
       }
-      if(coordinate.isEmpty() && warMap.isCoordIsWithinMap(actualCoordinate.getRightCoordinate())) {
-        coordinate = searchInitialCoord(warMap, actualCoordinate.getRightCoordinate());
+
+      if (coordinate.isEmpty() && !scannedMap
+          .containsKey(warMap.getRightCoordinate(actualCoordinate))) {
+        coordinate = getClosestEnemyCoordinate(warMap, warMap.getRightCoordinate(actualCoordinate));
       }
-      if(coordinate.isEmpty() && warMap.isCoordIsWithinMap(actualCoordinate.getDownCoordinate())) {
-        coordinate = searchInitialCoord(warMap, actualCoordinate.getDownCoordinate());
+      if (coordinate.isEmpty() && !scannedMap
+          .containsKey(warMap.getDownCoordinate(actualCoordinate))) {
+        coordinate = getClosestEnemyCoordinate(warMap, warMap.getDownCoordinate(actualCoordinate));
       }
-      if(coordinate.isEmpty() &&warMap.isCoordIsWithinMap(actualCoordinate.getLeftCoordinate())) {
-        coordinate = searchInitialCoord(warMap, actualCoordinate.getLeftCoordinate());
+      if (coordinate.isEmpty() && !scannedMap
+          .containsKey(warMap.getLeftCoordinate(actualCoordinate))) {
+        coordinate = getClosestEnemyCoordinate(warMap, warMap.getLeftCoordinate(actualCoordinate));
       }
     }
 

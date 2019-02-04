@@ -32,30 +32,6 @@ public class Coordinate {
     return coordinateX < 0 && coordinateY < 0;
   }
 
-  public Coordinate getRightCoordinate() {
-    return new Coordinate()
-        .setCoordinateX( this.coordinateX + 1)
-        .setCoordinateY( this.coordinateY);
-  }
-
-  public Coordinate getLeftCoordinate() {
-    return new Coordinate()
-        .setCoordinateX( this.coordinateX - 1)
-        .setCoordinateY( this.coordinateY);
-  }
-
-  public Coordinate getUpCoordinate() {
-    return new Coordinate()
-        .setCoordinateX( this.coordinateX)
-        .setCoordinateY( this.coordinateY + 1);
-  }
-
-  public Coordinate getDownCoordinate() {
-    return new Coordinate()
-        .setCoordinateX( this.coordinateX)
-        .setCoordinateY( this.coordinateY - 1);
-  }
-
   @Override
   public boolean equals(Object o) {
     if (this == o) {
