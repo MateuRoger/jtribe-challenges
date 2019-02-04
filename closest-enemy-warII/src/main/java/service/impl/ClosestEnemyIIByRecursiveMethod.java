@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import service.ClosestEnemyWarII;
+import service.ClosestEnemyII;
 
-public class ClosestEnemyWarIIByRecursiveMethod implements ClosestEnemyWarII {
+public class ClosestEnemyIIByRecursiveMethod implements ClosestEnemyII {
 
   private static final char INITIAL_VALUE = '1';
   private static final char ENEMY_VALUE = '2';
@@ -28,6 +28,8 @@ public class ClosestEnemyWarIIByRecursiveMethod implements ClosestEnemyWarII {
       .setCoordinateY(maxCoordinate.getCoordinateY() / 2);
 
     Coordinate initialCoordinate = searchInitialCoord(warMap, actualCoordinate);
+
+    getClosestEnemyCoordinate(warMap, actualCoordinate, distance);
 
     return distance;
   }
@@ -55,7 +57,7 @@ public class ClosestEnemyWarIIByRecursiveMethod implements ClosestEnemyWarII {
     return coordinate;
   }
 
-  private Coordinate getDistanceClosestEnemy (final WarMap warMap, final Coordinate actualCoordinate) {
+  private Coordinate getClosestEnemyCoordinate(final WarMap warMap, final Coordinate actualCoordinate, int distance) {
     Coordinate coordinate = new Coordinate();
 
     if ( warMap.getValueOfCoord(actualCoordinate) == ENEMY_VALUE){

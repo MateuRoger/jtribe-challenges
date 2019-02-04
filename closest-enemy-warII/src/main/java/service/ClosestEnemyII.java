@@ -1,6 +1,6 @@
 package service;
 
-public interface ClosestEnemyWarII {
+public interface ClosestEnemyII {
 
   int whitchEnemyIsClosest(String[] warMap);
 }
