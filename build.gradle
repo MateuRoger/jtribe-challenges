@@ -5,6 +5,7 @@ plugins{
 version = "1.0.0"
 
 allprojects {
+    group = "com.honesmind.jtribe-challenge"
     sourceCompatibility = 1.8
 
     repositories {
@@ -19,7 +20,4 @@ allprojects {
     wrapper{
         gradleVersion = '5.0'
     }
-
-    group = "com.honesmind.jtribe-challenge"
-    
 }

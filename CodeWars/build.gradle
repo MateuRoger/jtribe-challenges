@@ -2,7 +2,6 @@ plugins {
     id 'java'
 }
 
-group 'com.honesmind.jtribe-challenge'
 version '1.0.0'
 
 
