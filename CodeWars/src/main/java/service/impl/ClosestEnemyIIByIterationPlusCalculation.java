@@ -1,9 +1,8 @@
 package service.impl;
 
-import service.ClosestEnemyII;
-
 import java.util.HashMap;
 import java.util.Map;
+import service.ClosestEnemyII;
 
 public class ClosestEnemyIIByIterationPlusCalculation implements ClosestEnemyII {
 

@@ -1,9 +1,9 @@
 package service.impl;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Test;
 import service.ClosestEnemyII;
-
-import static org.junit.Assert.*;
 
 public class ClosestEnemyIIByRecursiveMethodTest {
 
