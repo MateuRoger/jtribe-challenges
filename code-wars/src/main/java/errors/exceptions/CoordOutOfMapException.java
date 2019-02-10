@@ -1,6 +1,6 @@
 package errors.exceptions;
 
-public class CoordOutOfMapException extends RuntimeException{
+public class CoordOutOfMapException extends RuntimeException {
 
   public CoordOutOfMapException(Throwable cause) {
     super(cause);

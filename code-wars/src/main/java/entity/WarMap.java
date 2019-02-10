@@ -2,7 +2,7 @@ package entity;
 
 public class WarMap {
 
-  private String[] warMapStr = new String[]{("0")};
+  private String[] warMapStr = new String[] {("0")};
 
   public String[] getWarMapStr() {
     return warMapStr;
@@ -13,11 +13,11 @@ public class WarMap {
     return this;
   }
 
-  public char getValueOfCoord(Coordinate coordinate){
+  public char getValueOfCoord(Coordinate coordinate) {
     return warMapStr[coordinate.getCoordinateY()].charAt(coordinate.getCoordinateX());
   }
 
-  public Coordinate getMaxCoord(){
+  public Coordinate getMaxCoord() {
     return new Coordinate().setCoordinateX(warMapStr.length).setCoordinateY(warMapStr[0].length());
 
   }

@@ -20,8 +20,8 @@ public class ClosestEnemyIIByRecursiveMethod implements ClosestEnemyII {
     final Coordinate maxCoordinate = warMap.getMaxCoord();
 
     Coordinate actualCoordinate = new Coordinate()
-      .setCoordinateX(maxCoordinate.getCoordinateX() / 2)
-      .setCoordinateY(maxCoordinate.getCoordinateY() / 2);
+        .setCoordinateX(maxCoordinate.getCoordinateX() / 2)
+        .setCoordinateY(maxCoordinate.getCoordinateY() / 2);
 
     Coordinate initialCoordinate = searchInitialCoord(warMap, actualCoordinate);
 
@@ -48,9 +48,9 @@ public class ClosestEnemyIIByRecursiveMethod implements ClosestEnemyII {
     Coordinate coordinate = new Coordinate();
     scannedMap.put(actualCoordinate, warMap.getValueOfCoord(actualCoordinate));
 
-    if ( warMap.getValueOfCoord(actualCoordinate) == INITIAL_VALUE){
+    if (warMap.getValueOfCoord(actualCoordinate) == INITIAL_VALUE) {
       coordinate = actualCoordinate;
-    }else{
+    } else {
       if (!scannedMap.containsKey(warMap.getUpCoordinate(actualCoordinate))) {
         coordinate = searchInitialCoord(warMap, warMap.getUpCoordinate(actualCoordinate));
       }
@@ -77,9 +77,9 @@ public class ClosestEnemyIIByRecursiveMethod implements ClosestEnemyII {
     Coordinate coordinate = new Coordinate();
     scannedMap.put(actualCoordinate, warMap.getValueOfCoord(actualCoordinate));
 
-    if ( warMap.getValueOfCoord(actualCoordinate) == ENEMY_VALUE){
+    if (warMap.getValueOfCoord(actualCoordinate) == ENEMY_VALUE) {
       coordinate = actualCoordinate;
-    }else{
+    } else {
       if (!scannedMap.containsKey(warMap.getUpCoordinate(actualCoordinate))) {
         coordinate = getClosestEnemyCoordinate(warMap, warMap.getUpCoordinate(actualCoordinate));
       }

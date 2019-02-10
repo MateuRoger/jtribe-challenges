@@ -1,4 +1,4 @@
-plugins{
+plugins {
     id('java')
 }
 
@@ -31,7 +31,6 @@ allprojects {
             events "passed", "skipped", "failed"
         }
     }
-    
-    
+
 
 }

@@ -20,15 +20,15 @@ public class ClosestEnemyIIByIterationPlusCalculation implements ClosestEnemyII 
     int indexOfStart;
     int indexOfEnemies;
 
-    for(int i = 0; warMap.length > i ; i++){
+    for (int i = 0; warMap.length > i; i++) {
       indexOfStart = warMap[i].indexOf('1');
-      if(indexOfStart >= 0 ){
+      if (indexOfStart >= 0) {
         startPossitionX = indexOfStart;
         startPossitionY = i;
       }
 
       indexOfEnemies = warMap[i].indexOf('2');
-      if(indexOfEnemies >= 0 ){
+      if (indexOfEnemies >= 0) {
         enemyPosition.put(indexOfEnemies, i);
       }
     }
@@ -43,20 +43,26 @@ public class ClosestEnemyIIByIterationPlusCalculation implements ClosestEnemyII 
     int mindistanceX;
     Integer distance = null;
 
-    for(Integer enemy : enemyPosition.keySet()) {
+    for (Integer enemy : enemyPosition.keySet()) {
       enemyX = enemy;
-      mindistanceXNormalCase = startPossitionX > enemyX ? startPossitionX - enemyX : enemyX - startPossitionX;
+      mindistanceXNormalCase =
+          startPossitionX > enemyX ? startPossitionX - enemyX : enemyX - startPossitionX;
       mindistanceXCornerCase = maxX - enemyX + startPossitionX;
 
       mindistanceX = Math.min(mindistanceXNormalCase, mindistanceXCornerCase);
 
       enemyY = enemyPosition.get(enemy);
-      mindistanceYNormalCase = startPossitionY > enemyY ? startPossitionY - enemyY : enemyY - startPossitionY;
+      mindistanceYNormalCase =
+          startPossitionY > enemyY ? startPossitionY - enemyY : enemyY - startPossitionY;
       mindistanceYCornerCase = maxY - enemyY + startPossitionY;
 
       mindistanceY = Math.min(mindistanceYNormalCase, mindistanceYCornerCase);
-      if(distance == null) distance = mindistanceX + mindistanceY;
-      if(distance > mindistanceX + mindistanceY) distance = mindistanceX + mindistanceY;
+      if (distance == null) {
+        distance = mindistanceX + mindistanceY;
+      }
+      if (distance > mindistanceX + mindistanceY) {
+        distance = mindistanceX + mindistanceY;
+      }
     }
 
     return distance;
