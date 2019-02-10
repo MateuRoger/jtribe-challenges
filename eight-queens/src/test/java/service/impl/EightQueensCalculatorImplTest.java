@@ -1,59 +1,39 @@
 package service.impl;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import errors.exception.CoordinateException;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ArgumentsSource;
 import service.EightQueensCalculator;
 
 class EightQueensCalculatorImplTest {
 
-  @Test
-  void eightQueens1() throws CoordinateException {
-    String[] eightQueensMap = new String[] {"(2,1)", "(4,2)", "(6,3)", "(8,4)", "(3,5)", "(1,6)",
-        "(7,7)", "(5,8)"};
 
+  @ParameterizedTest
+  @ArgumentsSource(EightQueensScenariosArgumentProvider.class)
+  @DisplayName("Test to the Eight Queens Calculator with different scenarios")
+  void eightQueensCalculatorWithDifferntScenarios(String[] scenario,
+      String expectedResult)
+      throws CoordinateException {
     EightQueensCalculator eightQueensCalculator = new EightQueensCalculatorImpl();
 
-    String result = eightQueensCalculator.eightQueens(eightQueensMap);
+    String result = eightQueensCalculator.eightQueens(scenario);
 
-    assertEquals(Boolean.TRUE.toString(), result);
+    assertEquals(expectedResult, result);
   }
 
   @Test
-  void eightQueens2() throws CoordinateException {
-    String[] eightQueensMap = new String[] {"(2,1)", "(4,3)", "(6,3)", "(8,4)", "(3,4)", "(1,6)",
+  @DisplayName("A scenario with an incorrect coordinate should send an exception")
+  void scenarioWithIncorrectCoordinateThorwsAnException() {
+    String[] scenario = new String[] {"(2,1)", "(4,2)", "(6,3)", "(-8,4)", "(3,5)", "(1,6)",
         "(7,7)", "(5,8)"};
-
     EightQueensCalculator eightQueensCalculator = new EightQueensCalculatorImpl();
 
-    String result = eightQueensCalculator.eightQueens(eightQueensMap);
-
-    assertEquals("(2,1)", result);
-  }
-
-  @Test
-  void eightQueens3() throws CoordinateException {
-    String[] eightQueensMap = new String[] {"(2,1)", "(5,3)", "(6,3)", "(8,4)", "(3,4)", "(1,8)",
-        "(7,7)", "(5,8)"};
-
-    EightQueensCalculator eightQueensCalculator = new EightQueensCalculatorImpl();
-
-    String result = eightQueensCalculator.eightQueens(eightQueensMap);
-
-    assertEquals("(5,3)", result);
-  }
-
-  @Test
-  void eightQueens4() throws CoordinateException {
-    String[] eightQueensMap = new String[] {"(2,1)", "(4,2)", "(6,3)", "(8,4)", "(3,5)", "(1,6)",
-        "(7,7)", "(7,8)"};
-
-    EightQueensCalculator eightQueensCalculator = new EightQueensCalculatorImpl();
-
-    String result = eightQueensCalculator.eightQueens(eightQueensMap);
-
-    assertEquals("(7,7)", result);
+    assertThrows(CoordinateException.class, () -> eightQueensCalculator.eightQueens(scenario));
   }
 
 }
