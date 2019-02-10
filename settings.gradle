@@ -1,3 +1,4 @@
 rootProject.name = 'jtribe-challenges'
 include 'code-wars'
+include 'eight-queens'
 
