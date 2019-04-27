@@ -1,14 +1,14 @@
-package service.impl;
+package service.solver.impl;
 
 import java.util.HashMap;
 import java.util.Map;
-import service.ClosestEnemyII;
+import service.solver.ClosestEnemyIISolver;
 
-public class ClosestEnemyIIByIterationPlusCalculation implements ClosestEnemyII {
+public class ClosestEnemyIISolverByIterationPlusCalculation implements ClosestEnemyIISolver {
 
 
   @Override
-  public int whitchEnemyIsClosest(String[] warMap) {
+  public int solve(String[] warMap) {
     int maxX = warMap[0].length();
     int maxY = warMap.length;
 

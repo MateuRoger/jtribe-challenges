@@ -1,12 +1,12 @@
-package service.impl;
+package service.solver.impl;
 
 import entity.Coordinate;
 import entity.WarMap;
 import java.util.HashMap;
 import java.util.Map;
-import service.ClosestEnemyII;
+import service.solver.ClosestEnemyIISolver;
 
-public class ClosestEnemyIIByRecursiveMethod implements ClosestEnemyII {
+public class ClosestEnemyIISolverByRecursiveMethod implements ClosestEnemyIISolver {
 
   private static final char INITIAL_VALUE = '1';
   private static final char ENEMY_VALUE = '2';
@@ -14,9 +14,9 @@ public class ClosestEnemyIIByRecursiveMethod implements ClosestEnemyII {
 
 
   @Override
-  public int whitchEnemyIsClosest(String[] warMapString) {
+  public int solve(String[] warMapString) {
 
-    final WarMap warMap = new WarMap().setWarMapStr(warMapString);
+    final WarMap warMap = new WarMap(warMapString);
     final Coordinate maxCoordinate = warMap.getMaxCoord();
 
     Coordinate actualCoordinate = new Coordinate()

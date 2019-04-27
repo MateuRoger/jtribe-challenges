@@ -2,24 +2,42 @@ package entity;
 
 public class WarMap {
 
-  private String[] warMapStr = new String[] {("0")};
+  private String[] warMapStr;
+  private Coordinate maxCoord;
+
+
+  public WarMap(String[] warMapStr, Coordinate maxCoord) {
+    this.warMapStr = warMapStr;
+    this.maxCoord = maxCoord;
+  }
+
+  public WarMap(String[] warMapStr) {
+    this.warMapStr = warMapStr;
+    this.maxCoord = new Coordinate().setCoordinateX(warMapStr.length)
+        .setCoordinateY(warMapStr[0].length());
+  }
 
   public String[] getWarMapStr() {
     return warMapStr;
   }
 
-  public WarMap setWarMapStr(String[] warMapStr) {
+  public WarMap setWarMapStr(final String[] warMapStr) {
     this.warMapStr = warMapStr;
     return this;
+  }
+
+  public Coordinate getMaxCoord() {
+    return this.maxCoord;
+
   }
 
   public char getValueOfCoord(Coordinate coordinate) {
     return warMapStr[coordinate.getCoordinateY()].charAt(coordinate.getCoordinateX());
   }
 
-  public Coordinate getMaxCoord() {
-    return new Coordinate().setCoordinateX(warMapStr.length).setCoordinateY(warMapStr[0].length());
-
+  public WarMap setMaxCoord(final Coordinate maxCoord) {
+    this.maxCoord = maxCoord;
+    return this;
   }
 
   public boolean isCoordIsWithinMap(Coordinate coordinate) {
