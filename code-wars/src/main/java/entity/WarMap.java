@@ -1,83 +1,75 @@
 package entity;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class WarMap {
 
-  private String[] warMapStr;
-  private Coordinate maxCoord;
+  private final String[] warMapStr;
 
-
-  public WarMap(String[] warMapStr, Coordinate maxCoord) {
+  public WarMap(final String[] warMapStr) {
     this.warMapStr = warMapStr;
-    this.maxCoord = maxCoord;
-  }
-
-  public WarMap(String[] warMapStr) {
-    this.warMapStr = warMapStr;
-    this.maxCoord = new Coordinate().setCoordinateX(warMapStr.length)
-        .setCoordinateY(warMapStr[0].length());
   }
 
   public String[] getWarMapStr() {
-    return warMapStr;
-  }
-
-  public WarMap setWarMapStr(final String[] warMapStr) {
-    this.warMapStr = warMapStr;
-    return this;
+    return this.warMapStr;
   }
 
   public Coordinate getMaxCoord() {
-    return this.maxCoord;
+    return new Coordinate().setCoordinateX(this.warMapStr.length)
+        .setCoordinateY(this.warMapStr[0].length());
 
   }
 
-  public char getValueOfCoord(Coordinate coordinate) {
-    return warMapStr[coordinate.getCoordinateY()].charAt(coordinate.getCoordinateX());
+  public char getValueOfCoord(final Coordinate coordinate) {
+    return this.warMapStr[coordinate.getCoordinateY()].charAt(coordinate.getCoordinateX());
   }
 
-  public WarMap setMaxCoord(final Coordinate maxCoord) {
-    this.maxCoord = maxCoord;
-    return this;
-  }
-
-  public boolean isCoordIsWithinMap(Coordinate coordinate) {
+  public boolean isCoordWithinMap(final Coordinate coordinate) {
     return (
-        (coordinate.getCoordinateX() < warMapStr[0].length() && coordinate.getCoordinateX() >= 0)
-            && (coordinate.getCoordinateY() < warMapStr.length)
+        (coordinate.getCoordinateX() < this.warMapStr[0].length()
+            && coordinate.getCoordinateX() >= 0)
+            && (coordinate.getCoordinateY() < this.warMapStr.length)
             && coordinate.getCoordinateY() >= 0);
   }
 
-  public Coordinate getRightCoordinate(Coordinate actualCoord) {
-    Coordinate coordinate = new Coordinate()
+  public Coordinate getRightCoordinate(final Coordinate actualCoord) {
+    final Coordinate coordinate = new Coordinate()
         .setCoordinateX(actualCoord.getCoordinateX() + 1)
         .setCoordinateY(actualCoord.getCoordinateY());
 
-    return isCoordIsWithinMap(coordinate) ? coordinate : coordinate.setCoordinateX(0);
+    return isCoordWithinMap(coordinate) ? coordinate : coordinate.setCoordinateX(0);
   }
 
-  public Coordinate getLeftCoordinate(Coordinate actualCoord) {
-    Coordinate coordinate = new Coordinate()
+  public Coordinate getLeftCoordinate(final Coordinate actualCoord) {
+    final Coordinate coordinate = new Coordinate()
         .setCoordinateX(actualCoord.getCoordinateX() - 1)
         .setCoordinateY(actualCoord.getCoordinateY());
 
-    return isCoordIsWithinMap(coordinate) ? coordinate
-        : coordinate.setCoordinateX(warMapStr[0].length() - 1);
+    return isCoordWithinMap(coordinate) ? coordinate
+        : coordinate.setCoordinateX(this.warMapStr[0].length() - 1);
   }
 
-  public Coordinate getUpCoordinate(Coordinate actualCoord) {
-    Coordinate coordinate = new Coordinate()
+  public Coordinate getUpCoordinate(@NotNull final Coordinate actualCoord) {
+    final Coordinate coordinate = new Coordinate()
         .setCoordinateX(actualCoord.getCoordinateX())
         .setCoordinateY(actualCoord.getCoordinateY() - 1);
 
-    return isCoordIsWithinMap(coordinate) ? coordinate
-        : coordinate.setCoordinateY(warMapStr.length - 1);
+    return isCoordWithinMap(coordinate) ? coordinate
+        : coordinate.setCoordinateY(this.warMapStr.length - 1);
   }
 
-  public Coordinate getDownCoordinate(Coordinate actualCoord) {
-    Coordinate coordinate = new Coordinate()
+  public Coordinate getDownCoordinate(@NotNull final Coordinate actualCoord) {
+    final Coordinate coordinate = new Coordinate()
         .setCoordinateX(actualCoord.getCoordinateX())
         .setCoordinateY(actualCoord.getCoordinateY() + 1);
 
-    return isCoordIsWithinMap(coordinate) ? coordinate : coordinate.setCoordinateX(0);
+    return isCoordWithinMap(coordinate) ? coordinate : coordinate.setCoordinateX(0);
+  }
+
+  public void setCoordinate(@NotNull final Coordinate coord, @NotEmpty final char value) {
+    StringBuilder newCoordRow = new StringBuilder(this.warMapStr[coord.getCoordinateX()]);
+    newCoordRow.setCharAt(coord.getCoordinateY(), value);
+    this.warMapStr[coord.getCoordinateX()] = newCoordRow.toString();
   }
 }

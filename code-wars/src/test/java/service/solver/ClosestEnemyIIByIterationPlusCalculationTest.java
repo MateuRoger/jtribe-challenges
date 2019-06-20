@@ -1,10 +1,9 @@
-package service.impl;
+package service.solver;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
-import service.solver.ClosestEnemyIISolver;
 import service.solver.impl.ClosestEnemyIISolverByIterationPlusCalculation;
 
 class ClosestEnemyIIByIterationPlusCalculationTest {
